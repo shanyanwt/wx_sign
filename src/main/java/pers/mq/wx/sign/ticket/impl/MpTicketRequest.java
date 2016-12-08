@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 import pers.mq.wx.model.JsapiTicket;
 import pers.mq.wx.sign.ticket.TicketRequest;
+import pers.mq.wx.utils.SignFileUtil;
 import pers.mq.wx.utils.WebRequestUtil;
 
 /**
@@ -30,6 +31,7 @@ public class MpTicketRequest implements TicketRequest {
         if (!Strings.isNullOrEmpty(requestResult)) {
             jsapiTicket = JSON.parseObject(requestResult, JsapiTicket.class);
             jsapiTicket.setCreateTime(now.getTime());
+            SignFileUtil.writeObject(jsapiTicket, "ticket.data");
         }
         return jsapiTicket;
     }

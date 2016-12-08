@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import pers.mq.wx.model.AccessToken;
 import pers.mq.wx.sign.token.TokenRequest;
+import pers.mq.wx.utils.SignFileUtil;
 import pers.mq.wx.utils.WebRequestUtil;
 
 /**
@@ -31,8 +32,8 @@ public class QyDevTokenRequest implements TokenRequest {
         if (!Strings.isNullOrEmpty(requestResult)) {
             accessToken = JSON.parseObject(requestResult, AccessToken.class);
             accessToken.setCreateTime(now.getTime());
+            SignFileUtil.writeObject(accessToken, "token.data");
         }
-        String json = "";
         return accessToken;
     }
 }

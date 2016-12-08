@@ -6,3 +6,4 @@
 *.iml
 target
 log
+wx_sign_config.json

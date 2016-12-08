@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import pers.mq.wx.model.AccessToken;
 import pers.mq.wx.model.JsapiTicket;
+import pers.mq.wx.model.Sign;
 import pers.mq.wx.model.WxConfig;
 import pers.mq.wx.sign.factory.SignFactory;
 import pers.mq.wx.sign.ticket.TicketRequest;
 import pers.mq.wx.sign.token.TokenRequest;
 import pers.mq.wx.utils.ResourceUtil;
+import pers.mq.wx.utils.SignFileUtil;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,6 +45,19 @@ public class SignSingleton {
             LOGGER.info("全局配置为：{}", wxConfig);
             instance = new SignSingleton();
             instance.setWxConfig(wxConfig);
+
+            Object object = SignFileUtil.readObject("token.data");
+            if(object != null) {
+                AccessToken accessToken = (AccessToken)object;
+                instance.setAccessToken(accessToken);
+                LOGGER.info("读取到accessToken：{}", accessToken);
+            }
+            object = SignFileUtil.readObject("ticket.data");
+            if(object != null) {
+                JsapiTicket jsapiTicket = (JsapiTicket)object;
+                instance.setJsapiTicket(jsapiTicket);
+                LOGGER.info("读取到jsapiTicket：{}", jsapiTicket);
+            }
         }
         return instance;
     }

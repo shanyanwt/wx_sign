@@ -2,6 +2,7 @@ package pers.mq.wx.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  * Time: 15:33
  * 微信令牌
  */
-public class AccessToken {
+public class AccessToken implements Serializable {
 
     /**
      * 令牌

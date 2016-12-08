@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import pers.mq.wx.model.JsapiTicket;
 import pers.mq.wx.sign.ticket.TicketRequest;
+import pers.mq.wx.utils.SignFileUtil;
 import pers.mq.wx.utils.WebRequestUtil;
 
 /**
@@ -29,7 +30,8 @@ public class QyDevTicketRequest implements TicketRequest {
         JsapiTicket jsapiTicket = null;
         if (!Strings.isNullOrEmpty(requestResult)) {
             jsapiTicket = JSON.parseObject(requestResult, JsapiTicket.class);
-            jsapiTicket.setCreateTime(now.getTime() );
+            jsapiTicket.setCreateTime(now.getTime());
+            SignFileUtil.writeObject(jsapiTicket, "ticket.data");
         }
         return jsapiTicket;
     }
