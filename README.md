@@ -4,10 +4,10 @@ resources/wx_sign_config.json
 ```
 {
   "appid": "appid",
-  "secret": "9K9mlvtkkmxsasxcWmT2etovj6yRXWC_gheZouEHcCuz-wrkiCtqL5dWsyfp7SzE",
+  "secret": "",
   "debug": false,
   "classname": "pers.mq.wx.sign.factory.impl.QydevSignFactory",
-  "url": "http://relax.ruijie.com.cn:99/relax/wx/"
+  "url": ""
 }
 ```
 
