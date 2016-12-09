@@ -1,8 +1,13 @@
 package pers.mq.wx.controller;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,32 +33,13 @@ public class SignControllerTest {
 
     @Test
     public void sign() throws Exception {
-/*        SignController sc = new SignController();
-        sc.sign(new ArrayList<>());*/
-        File directory = new File("data");
-        System.out.println(directory.getCanonicalPath());
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-//        System.out.println(directory.getAbsolutePath());
-        AccessToken accessToken = new AccessToken();
-        accessToken.setCreateTime(Calendar.getInstance().getTime());
-        accessToken.setAccessToken("token");
-        accessToken.setExpiresIn(7200);
-        File tokenFile = new File(directory.getCanonicalPath(), "token.data");
-        tokenFile.createNewFile();
-        OutputStream os = new FileOutputStream(tokenFile);
-        ObjectOutputStream oos = new ObjectOutputStream(os);
-        oos.writeObject(accessToken);
-        oos.flush();
-        oos.close();
-        os.close();
-
-        InputStream is = new FileInputStream(tokenFile);
-        ObjectInputStream ois = new ObjectInputStream(is);
-        AccessToken accessToken1 = (AccessToken)ois.readObject();
-        System.out.println(accessToken);
-        System.out.println(accessToken1);
+        RestTemplate template = new RestTemplate();
+        String url = "http://localhost:8080/wx_sign/api/sign/sign";
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
+        params.add("jsApiList", null);
+        ResponseEntity<String> response = template.postForEntity(url, params, String.class);
+        System.out.println(response.getBody());
+        Assert.assertEquals(200,response.getStatusCode().value());
 
     }
 
