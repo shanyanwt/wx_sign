@@ -13,6 +13,7 @@ import java.util.Map;
 
 import pers.mq.wx.model.AccessToken;
 import pers.mq.wx.model.JsapiTicket;
+import pers.mq.wx.model.RestResult;
 import pers.mq.wx.model.Sign;
 import pers.mq.wx.model.WxConfig;
 import pers.mq.wx.sign.SignSingleton;
@@ -57,7 +58,7 @@ public class SignController {
             LOGGER.error("签名生成出错");
         }
         LOGGER.info("本次生成token:{}, ticket:{}, sign:{}", signSingleton.getAccessToken(), signSingleton.getJsapiTicket(), sign);
-        return sign;
+        return RestResult.OK(sign);
     }
 
     /**
